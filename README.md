@@ -1,10 +1,274 @@
 **Test**
 
-**a.- Puedes encontrar la respuesta en el directorio first.**
+**a.- **
 
-**b.- Puedes encontrar la respuesta en el directorio second.**
+- Puedes encontrar el código en el directorio first.
 
-**c.- Puedes encontrar la respuesta en el directorio third.**
+```html
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="public/css/app-style.css">
+        <title>First Test</title>
+    </head>
+    <body>
+        <div>
+            <table>
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>DNI</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <script src="public/javascript/app.js"></script>
+    </body>
+</html>
+```
+
+```js
+
+// public/javascript/app.js
+
+(function(){
+
+  var people = getPeopleData();
+
+  var tableBody = document.querySelector("tbody");
+
+  buildTable(people, tableBody);
+
+  function buildTable(data, tableElement) {
+
+    var df = document.createDocumentFragment();
+
+    for(var i=0; i<data.length; i++) {
+
+      var register = data[i];
+
+      var indexColumn = document.createElement("td");
+      var firstNameColumn = document.createElement("td");
+      var lastNameColumn = document.createElement("td");
+      var dniColumn = document.createElement("td");
+
+      var row = document.createElement("tr");
+
+      indexColumn.textContent = i+1;
+      firstNameColumn.textContent = register[0];
+      lastNameColumn.textContent = register[1];
+      dniColumn.textContent = register[2];
+
+      row.appendChild(indexColumn);
+      row.appendChild(firstNameColumn);
+      row.appendChild(lastNameColumn);
+      row.appendChild(dniColumn);
+
+      df.appendChild(row);
+
+    }
+
+    tableElement.appendChild(df);
+  }
+
+  function getPeopleData() {
+    return [
+      ['Joe 01', 'First', '123456789'],
+      ['Joe 02', 'First', '123456789'],
+      ['Joe 03', 'First', '123456789'],
+      ['Joe 04', 'First', '123456789'],
+      ['Joe 05', 'First', '123456789'],
+      ['Joe 06', 'First', '123456789'],
+      ['Joe 07', 'First', '123456789'],
+      ['Joe 08', 'First', '123456789'],
+      ['Joe 09', 'First', '123456789'],
+      ['Joe 10', 'First', '123456789'],
+      ['Joe 11', 'First', '123456789'],
+      ['Joe 12', 'First', '123456789'],
+      ['Joe 13', 'First', '123456789'],
+      ['Joe 14', 'First', '123456789'],
+      ['Joe 15', 'First', '123456789'],
+      ['Joe 16', 'First', '123456789'],
+      ['Joe 17', 'First', '123456789'],
+      ['Joe 18', 'First', '123456789'],
+      ['Joe 19', 'First', '123456789'],
+      ['Joe 20', 'First', '123456789']
+    ];
+  }
+
+})();
+```
+
+**b.- Enumera todas las maneras que conoces para conocer la longitud de un objeto json en js. Indica también las formas que conoces de hacer la misma operación en php.**
+ 
+- Puedes encontrar el código en el directorio second.
+
+- Javascript
+
+```js
+(function(){
+
+  var json = getJson();
+
+  var divFirst = document.querySelector("div#first");
+  var divSecond = document.querySelector("div#second");
+
+  divFirst.textContent = firstWay(json);
+
+  divSecond.textContent = secondWay(json);
+
+  var div = document.querySelector("div#first");
+
+  function firstWay(jsonData) {
+    var jsonKeys = Object.keys(jsonData);
+    // console.log(jsonKeys);
+    return jsonKeys.length;
+  }
+
+  function secondWay(jsonData) {
+    var key = null;
+    var count = 0;
+    for(key in jsonData) {
+      // console.log(key);
+      count++;
+    }
+    return count;
+  }
+
+  function getJson() {
+    return {
+      id: 1,
+      firstName: 'José Gabriel',
+      lastname: 'González',
+      dni: '123456789A'
+    };
+  }
+
+})();
+```
+- PHP
+```php
+<?php
+namespace Entities;
+
+class User {
+
+    /**
+     * @var int
+     */
+    public $id;
+
+    /**
+     * @var string
+     */
+    public $dni;
+
+    /**
+     * @var string
+     */
+    public $firstName;
+
+    /**
+     * @var string
+     */
+    public $lastName;
+
+}
+?>
+
+<?php
+
+require_once 'Entities/User.php';
+
+use Entities\User;
+
+$myUser = new User(1, '123456789A', 'José Gabriel', 'González');
+
+$objectCountFirst = count((array)$myUser);
+$objectCountSecond = count(get_object_vars($myUser));
+
+?>
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="public/css/app-style.css">
+        <title>Second Test</title>
+    </head>
+    <body>
+        <div>
+            <h3>Javascript</h3>
+        </div>
+        <div id="first"></div>
+        <div id="second"></div>
+        <div>
+            <h3>PHP</h3>
+        </div>
+        <div id="third"><?php echo $objectCountFirst; ?></div>
+        <div id="fourth"><?php echo $objectCountSecond; ?></div>
+
+        <script src="public/javascript/app.js"></script>
+    </body>
+</html>
+```
+
+**c.- Teniendo la estructura de html en cualquier lugar de nuestra página, y sin poder editarlo...
+      <div id=’message’><div><span>Welcome</span> <span>user</span></div><button>Ok</button></div>
+      Cual sería la manera más sencilla, utilizando jquery, de aplicar un evento tal que cuando se pulse
+      sobre el botón, reemplace el texto Welcome, por Bienvenido. Asumimos que hay más HTML en
+      nuestra página**
+
+- Puedes encontrar el código en el directorio third.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="public/css/app-style.css">
+        <title>Third Test</title>
+    </head>
+    <body>
+        <div id="message">
+            <div>
+                <span>Welcome</span>
+                <span>User</span>
+            </div>
+            <button>
+                Ok
+            </button>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+        <script src="public/javascript/app.js"></script>
+    </body>
+</html>
+```
+
+```js
+(function(){
+
+    var english = true;
+
+    jQuery('#message button').on('click', function() {
+
+        english = !english;
+
+        if(english){
+            jQuery('#message div span:first-child').html('Bienvenido');
+        }
+        else {
+            jQuery('#message div span:first-child').html('Welcome');
+        }
+
+    });
+
+})();
+```
+
 
 **d.- Enumera todas las formas que conozcas de cargar y ejecutar javascript de forma asíncrona en un navegador web:**
  
