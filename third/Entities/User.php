@@ -1,7 +1,14 @@
 <?php
+
 namespace Entities;
 
-class User {
+use Core\Model;
+
+/**
+ * Class User
+ * @package Entities
+ */
+class User extends Model {
 
     /**
      * @var int
@@ -99,6 +106,15 @@ class User {
     public function setLastName(string $lastName): User {
         $this->lastName = $lastName;
         return $this;
+    }
+
+    public static function isValidate(string $date): bool {
+        list($day, $month, $year) = explode('/', $date);
+        return checkdate((int)$month, (int)$day, (int)$year);
+    }
+
+    public static function verifyDate(string $date): bool {
+        return (\DateTime::createFromFormat('d/m/Y', $date) !== false);
     }
 
 }
